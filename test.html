@@ -36,7 +36,7 @@
             const number_of_recipe = document.querySelector('#number_of_recipe').value;
 
             try {
-                const res = await fetch(`https://icook-app.herokuapp.com/getRecipesByIngredients`, {
+                const res = await fetch(`https://icook-backend.herokuapp.com/getRecipesByIngredients`, {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json'
@@ -86,7 +86,7 @@
         const recipeId = event.target.getAttribute('data-recipe-id');
 
         try {
-            const res = await fetch(`https://icook-app.herokuapp.com/getRecipesById/${recipeId}`);
+            const res = await fetch(`https://icook-backend.herokuapp.com/getRecipesById/${recipeId}`);
             const recipe = await res.json();
             console.log(recipe);
             // afficher les détails de la recette ici
