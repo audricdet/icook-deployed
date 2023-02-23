@@ -26,22 +26,21 @@
 const getRecipesByIngredients = async (request, response) => {
     // Récupérer la chaîne d'ingrédients et le nombre de recettes souhaité depuis le corps de la requête
     const {
-        ingredients,
+        ingredients: ingredientString,
         number_of_recipe
     } = request.body;
 
     // Fonction pour diviser la chaîne d'ingrédients en un tableau d'ingrédients distincts
     const parseIngredients = (inputString) => {
-        console.log(typeof inputString);
         // Séparer la chaîne en un tableau d'ingrédients individuels en utilisant une expression régulière
         const ingredients = inputString.split(/[,;]/).map((ingredient) => ingredient.trim());
         return ingredients;
     };
 
     try {
-        // Diviser la chaîne d'ingrédients en un tableau d'ingrédients distincts
-        const ingredientsArray = parseIngredients(ingredients);
-        
+        // Extraire la chaîne d'ingrédients de l'objet
+        const ingredientsArray = parseIngredients(ingredientString);
+
         // Appeler l'API avec les ingrédients et le nombre de recettes souhaité
         const res = await fetch(`https://api.spoonacular.com/recipes/findByIngredients?ingredients=${ingredientsArray.join(',')}&number=${number_of_recipe}&apiKey=${process.env.API_KEY_SPOONACULAR}`);
         const result = await res.json();
@@ -79,4 +78,5 @@ const getRecipesByIngredients = async (request, response) => {
         });
     }
 };
+
 export default getRecipesByIngredients;
