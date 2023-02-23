@@ -1,21 +1,13 @@
 <!DOCTYPE html>
 <html>
-
 <head>
     <title>Recipes Finder</title>
 </head>
-
 <body>
     <h1>Recipes Finder</h1>
     <form id="recipe-form">
-        <label for="ingredient_1">Ingredient 1:</label>
-        <input type="text" id="ingredient_1" name="ingredient_1">
-        <br><br>
-        <label for="ingredient_2">Ingredient 2:</label>
-        <input type="text" id="ingredient_2" name="ingredient_2">
-        <br><br>
-        <label for="ingredient_3">Ingredient 3:</label>
-        <input type="text" id="ingredient_3" name="ingredient_3">
+        <label for="ingredients">Ingredients:</label>
+        <input type="text" id="ingredients" name="ingredients">
         <br><br>
         <label for="number_of_recipe">Number of Recipes:</label>
         <input type="number" id="number_of_recipe" name="number_of_recipe">
@@ -24,59 +16,55 @@
     </form>
     <div id="recipe-results"></div>
     <script>
-        
         const form = document.querySelector('#recipe-form');
         const resultsContainer = document.querySelector('#recipe-results');
+javascript
+Copy code
+    form.addEventListener('submit', async (event) => {
+        event.preventDefault();
+        const ingredients = document.querySelector('#ingredients').value.split(',');
+        const number_of_recipe = document.querySelector('#number_of_recipe').value;
 
-        form.addEventListener('submit', async (event) => {
-            event.preventDefault();
-            const ingredient_1 = document.querySelector('#ingredient_1').value;
-            const ingredient_2 = document.querySelector('#ingredient_2').value;
-            const ingredient_3 = document.querySelector('#ingredient_3').value;
-            const number_of_recipe = document.querySelector('#number_of_recipe').value;
-
-            try {
-                const res = await fetch(`https://icook-backend.herokuapp.com/getRecipesByIngredients`, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify({
-                        ingredient_1,
-                        ingredient_2,
-                        ingredient_3,
-                        number_of_recipe
-                    })
-                });
-                const recipe = await res.json();
-                console.log(recipe)
-                let recipesHTML = '';
-                for (let i = 0; i < recipe.result.length; i++) {
-                    let missedIngredientsHTML = '';
-                    let usedIngredientsHTML = '';
-                    for (let j = 0; j < recipe.result[i].missedIngredients.length; j++) {
-                        missedIngredientsHTML += `<p>${recipe.result[i].missedIngredients[j].name}</p>`;
-                    }
-                    for (let k = 0; k < recipe.result[i].usedIngredients.length; k++) {
-                        usedIngredientsHTML += `<p>${recipe.result[i].usedIngredients[k].name}</p>`;
-                    }
-                    recipesHTML += `
-                        <div class="recipe" data-recipe-id="${recipe.result[i].id}">
-                            <h2>${recipe.result[i].title}</h2>
-                            <p>ID: ${recipe.result[i].id}</p>
-                            <p>Missed Ingredients:</p>
-                            ${missedIngredientsHTML}
-                            <p>Used Ingredients:</p>
-                            ${usedIngredientsHTML}
-                        </div>
-                            `;
+        try {
+            const res = await fetch(`https://icook-backend.herokuapp.com/getRecipesByIngredients`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    ingredients,
+                    number_of_recipe
+                })
+            });
+            const recipe = await res.json();
+            console.log(recipe)
+            let recipesHTML = '';
+            for (let i = 0; i < recipe.result.length; i++) {
+                let missedIngredientsHTML = '';
+                let usedIngredientsHTML = '';
+                for (let j = 0; j < recipe.result[i].missedIngredients.length; j++) {
+                    missedIngredientsHTML += `<p>${recipe.result[i].missedIngredients[j].name}</p>`;
                 }
-                resultsContainer.innerHTML = recipesHTML;
-
-            } catch (error) {
-                console.error(error);
+                for (let k = 0; k < recipe.result[i].usedIngredients.length; k++) {
+                    usedIngredientsHTML += `<p>${recipe.result[i].usedIngredients[k].name}</p>`;
+                }
+                recipesHTML += `
+                    <div class="recipe" data-recipe-id="${recipe.result[i].id}">
+                        <h2>${recipe.result[i].title}</h2>
+                        <p>ID: ${recipe.result[i].id}</p>
+                        <p>Missed Ingredients:</p>
+                        ${missedIngredientsHTML}
+                        <p>Used Ingredients:</p>
+                        ${usedIngredientsHTML}
+                    </div>
+                        `;
             }
-        });
+            resultsContainer.innerHTML = recipesHTML;
+
+        } catch (error) {
+            console.error(error);
+        }
+    });
     
 
         const resultsContainer2 = document.querySelector('#recipe-results');
