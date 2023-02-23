@@ -61,4 +61,12 @@ const getRecipesByIngredients = async (request, response) => {
         response.send({
             result: filteredResult
         });
-    } catch (error
+    } catch (error) {
+        console.error(error);
+        response.status(500).send({
+            error: "Could not fetch recipes"
+        });
+    }
+};
+
+export default getRecipesByIngredients;
