@@ -21,7 +21,8 @@
 
     form.addEventListener('submit', async (event) => {
         event.preventDefault();
-        const ingredients = document.querySelector('#ingredients').value.split(',');
+        const ingredientsString = document.querySelector('#ingredients').value;
+        const ingredients = ingredientsString.split(', ').map(ingredient => ingredient.trim());
         const number_of_recipe = document.querySelector('#number_of_recipe').value;
 
         try {
