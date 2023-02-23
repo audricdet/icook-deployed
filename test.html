@@ -16,9 +16,9 @@
     </form>
     <div id="recipe-results"></div>
     <script>
-        const form = document.querySelector('#recipe-form');
+        
         const resultsContainer = document.querySelector('#recipe-results');
-
+        const form = document.querySelector('#recipe-form');
     form.addEventListener('submit', async (event) => {
         event.preventDefault();
         const ingredientsString = document.querySelector('#ingredients').value;
