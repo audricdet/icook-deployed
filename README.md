@@ -1,4 +1,3 @@
-
-Backend d'une application qui recherche des recettes en fonction des ingrédients dans notre frigo
-La technologie utilisée est Node.js avec le framework Express.
- L'application est déployée via Heroku.
+Backend of an application that searches for recipes based on the ingredients we have in our fridge. 
+Technology used Node.js, Express.js. 
+Deployed via heroku
