@@ -47,7 +47,6 @@
 
 // export default getRecipesByIngredients;
 
-
 const getRecipesByIngredients = async (request, response) => {
     // Récupérer le tableau d'ingrédients et le nombre de recettes souhaité depuis le corps de la requête
     const {
@@ -82,14 +81,31 @@ const getRecipesByIngredients = async (request, response) => {
         // Trier les résultats par note décroissante
         filteredResult.sort((a, b) => b.score - a.score);
 
-        // Renvoyer les résultats triés
+        // Récupérer le titre de la première recette
+        const title = filteredResult[0].title;
+
+        // Appeler l'API OpenAI avec le titre de la recette
+        const configuration = new Configuration({
+            apiKey: process.env.API_KEY_OPENAI,
+        });
+
+        const openai = new OpenAIApi(configuration);
+
+        const response = await openai.createImage({
+            prompt: title,
+            n: 1,
+            size: "256x256",
+        });
+
+        // Renvoyer les résultats triés et l'image générée par OpenAI
         response.send({
-            result: filteredResult
+            result: filteredResult,
+            image: response.data
         });
     } catch (error) {
         console.error(error);
         response.status(500).send({
-            error: "Could not fetch recipes"
+            error: "Could not fetch recipes and DALLE images"
         });
     }
 };
