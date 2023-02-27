@@ -46,6 +46,13 @@
 // };
 
 // export default getRecipesByIngredients;
+const apiKey = process.env.API_KEY_OPENAI
+import { Configuration, OpenAIApi } from "openai"
+
+const configuration = new Configuration({
+    apiKey: apiKey,
+})
+const openai = new OpenAIApi(configuration)
 
 const getRecipesByIngredients = async (request, response) => {
     // Récupérer le tableau d'ingrédients et le nombre de recettes souhaité depuis le corps de la requête
