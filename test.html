@@ -49,14 +49,15 @@
                     usedIngredientsHTML += `<p>${recipe.result[i].usedIngredients[k].name}</p>`;
                 }
                 recipesHTML += `
-                    <div class="recipe" data-recipe-id="${recipe.result[i].id}">
-                        <h2>${recipe.result[i].title}</h2>
-                        <p>ID: ${recipe.result[i].id}</p>
-                        <p>Missed Ingredients:</p>
-                        ${missedIngredientsHTML}
-                        <p>Used Ingredients:</p>
-                        ${usedIngredientsHTML}
-                    </div>
+                <div class="recipe" data-recipe-id="${recipe.result[i].id}">
+    <h2>${recipe.result[i].title}</h2>
+    <p>ID: ${recipe.result[i].id}</p>
+    <img src="${recipeImages[i]}" alt="Image of ${recipe.result[i].title}">
+    <p>Missed Ingredients:</p>
+    ${missedIngredientsHTML}
+    <p>Used Ingredients:</p>
+    ${usedIngredientsHTML}
+</div>
                         `;
             }
             resultsContainer.innerHTML = recipesHTML;
