@@ -51,7 +51,7 @@
                 recipesHTML += `
                     <div class="recipe" data-recipe-id="${recipe.result[i].id}">
                         <h2>${recipe.result[i].title}</h2>
-                        <img>${recipe.result.image}</img>
+                        <img>${recipe.result[i].image}</img>
                         <p>ID: ${recipe.result[i].id}</p>
                         <p>Missed Ingredients:</p>
                         ${missedIngredientsHTML}
