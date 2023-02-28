@@ -18,7 +18,7 @@ const getDalleImages = async (request) => {
     });
     console.log(response.data)
 
-    response.send(response.data[0].url)
+    response.json({url: response.data[0].url})
 }
 
 export default getDalleImages
