@@ -8,17 +8,22 @@ const configuration = new Configuration({
 })
 const openai = new OpenAIApi(configuration)
 
-const getDalleImages = async (request) => {
-    const title = request.body.title
+const getDalleImages = async (request, response) => {
+    try {
+        const title = request.body.title
 
-    const response = await openai.createImage({
-        prompt: title,
-        n: 1,
-        size: "256x256",
-    });
-    console.log(response.data)
+        const responseFromAPI = await openai.createImage({
+            prompt: title,
+            n: 1,
+            size: "256x256",
+        });
+        console.log(responseFromAPI.data)
 
-    response.json({url: response.data[0].url})
+        response.send(responseFromAPI.data[0].url)
+    } catch (error) {
+        console.error(error)
+        response.status(500).send('Internal Server Error')
+    }
 }
 
 export default getDalleImages
