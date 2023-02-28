@@ -94,7 +94,7 @@
 
                 let imageHTML = '';
                 for (let i = 0; i < images.length; i++) {
-                imageHTML += `<img src="${images[i]}"></img>`;
+                imageHTML += `<img src="${images}"></img>`;
                 }
 
             const extendedIngredients = recipe.result.extendedIngredients.map(ingredient => `<li>${ingredient.original}</li>`).join('');
