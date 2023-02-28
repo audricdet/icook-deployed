@@ -12,7 +12,7 @@ const getDalleImages = async (request) => {
     const { title } = request.body
 
     const response = await openai.createImage({
-        prompt: title,
+        prompt: [title],
         n: 1,
         size: "256x256",
     });
