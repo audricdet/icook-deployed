@@ -92,10 +92,10 @@
         const images = await res2.json();
         console.log(images);
 
-                let imageHTML = '';
-                for (let i = 0; i < images.length; i++) {
-                imageHTML += `<img src="${images.data[i].url}"></img>`;
-                }
+                // let imageHTML = '';
+                // for (let i = 0; i < images.length; i++) {
+                // imageHTML += `<img src="${images.data[i].url}"></img>`;
+                // }
 
             const extendedIngredients = recipe.result.extendedIngredients.map(ingredient => `<li>${ingredient.original}</li>`).join('');
 
