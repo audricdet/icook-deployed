@@ -7,7 +7,7 @@ const configuration = new Configuration({
 const openai = new OpenAIApi(configuration)
 
 const getDalleImages = async (request) => {
-    const title = request.params.title 
+    const { title } = request.body
 
     const response = await openai.createImage({
         prompt: title,
