@@ -78,7 +78,16 @@
             const res = await fetch(`https://icook-backend.herokuapp.com/getRecipesById/${recipeId}`);
             const recipe = await res.json();
             console.log(recipe);
-            // afficher les détails de la recette ici
+            const title = recipe.result.title;
+
+        const res2 = await fetch(`https://icook-backend.herokuapp.com/getDalleImages?title=${title}`);
+        const images = await res2.json();
+        console.log(images);
+
+                let imageHTML = '';
+                for (let i = 0; i < images.length; i++) {
+                imageHTML += `<img src="${images[i]}"></img>`;
+                }
 
             const extendedIngredients = recipe.result.extendedIngredients.map(ingredient => `<li>${ingredient.original}</li>`).join('');
 
