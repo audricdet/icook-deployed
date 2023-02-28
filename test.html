@@ -80,7 +80,15 @@
             console.log(recipe);
             const title = recipe.result.title;
 
-        const res2 = await fetch(`https://icook-backend.herokuapp.com/getDalleImages?title=${title}`);
+        const res2 = await fetch(`https://icook-backend.herokuapp.com/getDalleImages?title=${title}`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        title: title
+      })
+    });
         const images = await res2.json();
         console.log(images);
 
