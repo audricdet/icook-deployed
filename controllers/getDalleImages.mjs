@@ -19,7 +19,7 @@ const getDalleImages = async (request, response) => {
         });
         console.log(responseFromAPI.data)
 
-        response.send(responseFromAPI.data[0].url)
+        response.send(responseFromAPI.data)
     } catch (error) {
         console.error(error)
         response.status(500).send('Internal Server Error')
