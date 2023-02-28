@@ -1,5 +1,7 @@
-const apiKey = process.env.API_KEY_OPENAI
+import bodyParser from "body-parser"
 import { Configuration, OpenAIApi } from "openai"
+
+const apiKey = process.env.API_KEY_OPENAI
 
 const configuration = new Configuration({
     apiKey: apiKey,
