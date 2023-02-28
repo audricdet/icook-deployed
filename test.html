@@ -111,6 +111,7 @@
             const recipeDetailsHTML = `
                 <div class="recipe-details">
                     <h2>${recipe.result.title}</h2>
+                    <img src="${images.data[0].url}"></img>
                     <ul>Extended Ingredients : ${extendedIngredients}</ul>
                     <p>Ready in : ${recipe.result.readyInMinutes} minutes</p>
                     <p>Instructions ${analyzedInstructionsHTML}</p>
@@ -118,6 +119,7 @@
             `;
 
             // Ajouter les détails de la recette à la division cible
+            
             event.target.insertAdjacentHTML('afterend', recipeDetailsHTML);
 
         } catch (error) {
